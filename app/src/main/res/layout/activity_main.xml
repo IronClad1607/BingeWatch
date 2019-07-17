@@ -12,9 +12,9 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="250dp"
+        android:orientation="vertical"
         android:gravity="center"
-        android:orientation="vertical">
+        android:layout_marginBottom="250dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
@@ -23,19 +23,44 @@
             android:fontFamily="sans-serif-condensed-light"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:textSize="15sp" />
+            android:textSize="20sp" />
 
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etPassword"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed-light"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textSize="15sp" />
+            android:gravity="center">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-light"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <Button
+        android:id="@+id/btnGuest"
+        android:text="Create Guest Session"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:textColor="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnLogIn"
+        android:text="Log In"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:textColor="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
