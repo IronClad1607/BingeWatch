@@ -1,5 +1,7 @@
 package com.example.bingewatch
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -59,6 +61,13 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
                 Log.d("Token","$sessionResponse")
             }
+        }
+
+
+        btnSignUp.setOnClickListener {
+            val signUpIntent = Intent()
+            signUpIntent.action = Intent.ACTION_VIEW
+            signUpIntent.data = Uri.parse("https://www.themoviedb.org/account/signup")
         }
     }
 }
