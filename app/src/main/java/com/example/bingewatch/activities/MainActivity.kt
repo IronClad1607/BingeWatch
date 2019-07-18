@@ -1,10 +1,12 @@
-package com.example.bingewatch
+package com.example.bingewatch.activities
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.bingewatch.R
 import com.example.bingewatch.auth.models.AuthRequestToken
 import com.example.bingewatch.auth.models.SessionResponseBody
 import com.example.bingewatch.networks.getGuestSession
@@ -53,13 +55,18 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
                 val authResponse = postAuthTokenRequest(authRequestBody)
 
 
-
                 val requestToken = authResponse?.request_token //Authorized RequestToken
                 val sessionResponseBody = SessionResponseBody(requestToken)
 
                 val sessionResponse = postSession(sessionResponseBody)
 
-                Log.d("Token","$sessionResponse")
+                if (sessionResponse != null) {
+                    val logInIntent = Intent(this@MainActivity, MoviesActivity::class.java)
+                    logInIntent.putExtra("session_id", sessionResponse.session_id)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this@MainActivity, "Invalid Username or Password!", Toast.LENGTH_LONG).show()
+                }
             }
         }
 
@@ -68,6 +75,9 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
             val signUpIntent = Intent()
             signUpIntent.action = Intent.ACTION_VIEW
             signUpIntent.data = Uri.parse("https://www.themoviedb.org/account/signup")
+            startActivity(signUpIntent)
+
+            Log.d("Signup", "$signUpIntent")
         }
     }
 }
