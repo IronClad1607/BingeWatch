@@ -3,7 +3,12 @@ package com.example.bingewatch
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.bingewatch.auth.models.AuthRequestToken
+import com.example.bingewatch.auth.models.SessionResponseBody
 import com.example.bingewatch.networks.getGuestSession
+import com.example.bingewatch.networks.getTokenRequest
+import com.example.bingewatch.networks.postAuthTokenRequest
+import com.example.bingewatch.networks.postSession
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,8 +32,32 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         btnGuest.setOnClickListener {
             launch {
                 val session = getGuestSession()
-                Log.i("Guest","$session")
+                Log.i("Guest", "$session")
 
+            }
+        }
+
+        btnLogIn.setOnClickListener {
+            launch {
+                val token = getTokenRequest()
+
+                val authRequestBody =
+                    AuthRequestToken(
+                        etEmail.text.toString(),
+                        etPassword.text.toString(),
+                        token?.request_token
+                    )
+
+                val authResponse = postAuthTokenRequest(authRequestBody)
+
+
+
+                val requestToken = authResponse?.request_token //Authorized RequestToken
+                val sessionResponseBody = SessionResponseBody(requestToken)
+
+                val sessionResponse = postSession(sessionResponseBody)
+
+                Log.d("Token","$sessionResponse")
             }
         }
     }
