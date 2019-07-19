@@ -1,7 +1,7 @@
 package com.example.bingewatch.networks
 
 import android.util.Log
-import com.example.bingewatch.auth.models.*
+import com.example.bingewatch.auth.*
 
 suspend fun getGuestSession(): GuestSessionResponse? {
 

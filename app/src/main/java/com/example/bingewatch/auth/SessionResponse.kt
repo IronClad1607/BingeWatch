@@ -1,4 +1,4 @@
-package com.example.bingewatch.auth.models
+package com.example.bingewatch.auth
 
 data class SessionResponse(
     var success: Boolean,

@@ -1,6 +1,6 @@
 package com.example.bingewatch.networks
 
-import com.example.bingewatch.auth.models.*
+import com.example.bingewatch.auth.*
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

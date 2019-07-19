@@ -7,8 +7,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bingewatch.R
-import com.example.bingewatch.auth.models.AuthRequestToken
-import com.example.bingewatch.auth.models.SessionResponseBody
+import com.example.bingewatch.auth.AuthRequestToken
+import com.example.bingewatch.auth.SessionResponseBody
 import com.example.bingewatch.networks.getGuestSession
 import com.example.bingewatch.networks.getTokenRequest
 import com.example.bingewatch.networks.postAuthTokenRequest
