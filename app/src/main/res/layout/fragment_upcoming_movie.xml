@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".movie_fragments.UpcomingMovie">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvUpcomingMovies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:padding="10dp" />
 
 </FrameLayout>

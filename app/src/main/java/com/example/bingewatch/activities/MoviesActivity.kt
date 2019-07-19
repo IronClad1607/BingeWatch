@@ -16,6 +16,7 @@ import androidx.viewpager.widget.ViewPager
 import com.example.bingewatch.R
 import com.example.bingewatch.adapters.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.app_bar_movies.*
 
 class MoviesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
