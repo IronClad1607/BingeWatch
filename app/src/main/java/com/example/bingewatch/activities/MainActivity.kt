@@ -60,10 +60,11 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
                 val sessionResponse = postSession(sessionResponseBody)
 
+                Log.d("Session","$sessionResponse")
                 if (sessionResponse != null) {
                     val logInIntent = Intent(this@MainActivity, MoviesActivity::class.java)
                     logInIntent.putExtra("session_id", sessionResponse.session_id)
-                    startActivity(intent)
+                    startActivity(logInIntent)
                 } else {
                     Toast.makeText(this@MainActivity, "Invalid Username or Password!", Toast.LENGTH_LONG).show()
                 }

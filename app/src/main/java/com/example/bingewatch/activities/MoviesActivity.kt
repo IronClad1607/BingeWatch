@@ -12,10 +12,15 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import androidx.viewpager.widget.ViewPager
 import com.example.bingewatch.R
+import com.example.bingewatch.adapters.ViewPagerAdapter
+import com.google.android.material.tabs.TabLayout
 
 class MoviesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    var tabLayout : TabLayout?= null
+    var viewPager : ViewPager?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +37,35 @@ class MoviesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+
+
+        tabLayout = findViewById(R.id.tabLayout)
+        viewPager = findViewById(R.id.vpContent)
+
+        tabLayout!!.addTab(tabLayout!!.newTab().setText(R.string.popular_movies))
+        tabLayout!!.addTab(tabLayout!!.newTab().setText(R.string.upcoming_movies))
+        tabLayout!!.addTab(tabLayout!!.newTab().setText(R.string.fav_movie))
+
+        val viewPagerAdapter = ViewPagerAdapter(this,supportFragmentManager,tabLayout!!.tabCount)
+        viewPager!!.adapter = viewPagerAdapter
+
+
+        viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
+
+        tabLayout!!.addOnTabSelectedListener(object:TabLayout.OnTabSelectedListener{
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
+            }
+
+            override fun onTabSelected(p0: TabLayout.Tab?) {
+                viewPager!!.currentItem = p0!!.position
+            }
+
+        })
+
     }
 
     override fun onBackPressed() {
@@ -55,6 +89,7 @@ class MoviesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         when (item.itemId) {
             R.id.movies -> {
                 val moviesIntent = Intent(this,MoviesActivity::class.java)
+                startActivity(moviesIntent)
             }
             R.id.tvSeries -> {
 
