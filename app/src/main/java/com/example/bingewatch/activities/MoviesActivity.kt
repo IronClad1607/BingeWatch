@@ -63,6 +63,7 @@ class MoviesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
             override fun onTabSelected(p0: TabLayout.Tab?) {
                 viewPager!!.currentItem = p0!!.position
+                toolbar.title = p0.text
             }
 
         })

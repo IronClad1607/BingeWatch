@@ -1,11 +1,13 @@
 package com.example.bingewatch.activities
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import com.example.bingewatch.R
 import com.example.bingewatch.auth.AuthRequestToken
 import com.example.bingewatch.auth.SessionResponseBody
@@ -23,14 +25,21 @@ import kotlin.coroutines.CoroutineContext
 class MainActivity : AppCompatActivity(), CoroutineScope {
 
 
-    val superviser = SupervisorJob()
+    private val supervisor = SupervisorJob()
     override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + superviser
+        get() = Dispatchers.Main + supervisor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val pref = getPreferences(Context.MODE_PRIVATE)
+
+
+        val retainLoginInIntent = Intent(this,MoviesActivity::class.java)
+        if(pref.contains("username") && pref.contains("password")){
+            startActivity(retainLoginInIntent)
+        }
 
 
         btnGuest.setOnClickListener {
@@ -62,6 +71,10 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
                 Log.d("Session","$sessionResponse")
                 if (sessionResponse != null) {
+                    pref.edit {
+                        putString("username",etEmail.text.toString())
+                        putString("password",etPassword.text.toString())
+                    }
                     val logInIntent = Intent(this@MainActivity, MoviesActivity::class.java)
                     logInIntent.putExtra("session_id", sessionResponse.session_id)
                     startActivity(logInIntent)

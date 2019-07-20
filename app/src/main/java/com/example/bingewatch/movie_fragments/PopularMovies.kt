@@ -32,8 +32,8 @@ class PopularMovies : Fragment(),CoroutineScope {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         launch {
-            val popularMovies = getPopularMovies()
-            rvPopularMovies.layoutManager =LinearLayoutManager(requireContext(),RecyclerView.VERTICAL,false)
+//            val popularMovies = getPopularMovies()
+//            rvPopularMovies.layoutManager =LinearLayoutManager(requireContext(),RecyclerView.VERTICAL,false)
         }
 
     }
