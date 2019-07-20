@@ -1,16 +1,12 @@
 <resources>
     <string name="app_name">BingeWatch</string>
     <string name="apiKey">d5b568462e39f02e011bb612583ead1e</string>
-    <string name="title_activity_movies">MoviesActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_desc">Navigation header</string>
 
-
-    <string name="popular_movies">Popular Movies</string>
-    <string name="upcoming_movies">Upcoming Movies</string>
-    <string name="fav_movie">Favourite Movies</string>
+    <string name="movies">Movies</string>
+    <string name="tvSeries">TV Series</string>
+    <string name="celebs">Celebrities</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

@@ -22,7 +22,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class MainActivity : AppCompatActivity(), CoroutineScope {
+class LoginActivity : AppCompatActivity(), CoroutineScope {
 
 
     private val supervisor = SupervisorJob()
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         val pref = getPreferences(Context.MODE_PRIVATE)
 
 
-        val retainLoginInIntent = Intent(this,MoviesActivity::class.java)
+        val retainLoginInIntent = Intent(this,MajorActivity::class.java)
         if(pref.contains("username") && pref.contains("password")){
             startActivity(retainLoginInIntent)
         }
@@ -75,11 +75,11 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
                         putString("username",etEmail.text.toString())
                         putString("password",etPassword.text.toString())
                     }
-                    val logInIntent = Intent(this@MainActivity, MoviesActivity::class.java)
+                    val logInIntent = Intent(this@LoginActivity, MajorActivity::class.java)
                     logInIntent.putExtra("session_id", sessionResponse.session_id)
                     startActivity(logInIntent)
                 } else {
-                    Toast.makeText(this@MainActivity, "Invalid Username or Password!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LoginActivity, "Invalid Username or Password!", Toast.LENGTH_LONG).show()
                 }
             }
         }

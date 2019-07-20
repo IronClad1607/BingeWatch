@@ -6,7 +6,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.LoginActivity">
 
 
     <com.google.android.material.textfield.TextInputLayout

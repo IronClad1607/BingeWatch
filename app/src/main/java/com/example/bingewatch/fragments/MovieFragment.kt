@@ -1,4 +1,4 @@
-package com.example.bingewatch.movie_fragments
+package com.example.bingewatch.fragments
 
 
 import android.os.Bundle
@@ -9,14 +9,14 @@ import android.view.ViewGroup
 
 import com.example.bingewatch.R
 
-class UpcomingMovie : Fragment() {
+class MovieFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_upcoming_movie, container, false)
+        return inflater.inflate(R.layout.fragment_movie, container, false)
     }
 
 
