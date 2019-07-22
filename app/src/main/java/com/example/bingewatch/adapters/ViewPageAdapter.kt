@@ -8,12 +8,12 @@ import com.example.bingewatch.fragments.MovieFragment
 import com.example.bingewatch.fragments.TVSeriesFragment
 
 class ViewPageAdapter(fragmentManager: FragmentManager, var totalTabs: Int) : FragmentPagerAdapter(fragmentManager) {
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> MovieFragment()
             1 -> TVSeriesFragment()
             2 -> CelebrityFragment()
-            else -> null
+            else -> Fragment()
         }
     }
 

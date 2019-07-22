@@ -4,17 +4,20 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bingewatch.R
-import com.example.bingewatch.model_movies.Result
+import com.example.bingewatch.model_movies.MoviesDetails
+import com.example.bingewatch.model_movies.PopularMovies
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cvmovies.view.*
 
-class PopularMoviesAdapter(private val popularMovies: ArrayList<Result>,val context: Context) : RecyclerView.Adapter<PopularMoviesAdapter.ViewHolder>(){
+class PopularMoviesAdapter(private val popularMovies: ArrayList<MoviesDetails>, val context: Context) :
+    RecyclerView.Adapter<PopularMoviesAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val li = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = li.inflate(R.layout.cvmovies,parent,false)
-        return ViewHolder(view,context)
+        val view = li.inflate(R.layout.cvmovies, parent, false)
+        return ViewHolder(view, context)
     }
 
     override fun getItemCount() = popularMovies.size
@@ -25,13 +28,13 @@ class PopularMoviesAdapter(private val popularMovies: ArrayList<Result>,val cont
     }
 
 
-    class ViewHolder(itemView: View,context: Context ) : RecyclerView.ViewHolder(itemView){
-        fun bind(popularMovies: Result){
-            with(itemView){
-                tvTitleMovie.text = popularMovies.original_title
-                val year = popularMovies.release_date.substring(0,4)
+    class ViewHolder(itemView: View, context: Context) : RecyclerView.ViewHolder(itemView) {
+        fun bind(popularMovies: MoviesDetails) {
+            with(itemView) {
+                tvTitleMovie.text = popularMovies.title
+                val year = popularMovies.release_date.substring(0, 4)
                 tvYearMovie.text = year
-                Picasso.get().load(popularMovies.poster_path).into(imagePoster)
+                Picasso.get().load("https://image.tmdb.org/t/p/w500${popularMovies.poster_path}").into(imagePoster)
             }
         }
     }

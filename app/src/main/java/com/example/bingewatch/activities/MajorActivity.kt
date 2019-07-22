@@ -38,7 +38,8 @@ class MajorActivity : AppCompatActivity() {
 
         tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {
-
+                viewPager!!.currentItem = p0!!.position
+                toolbar.title = p0.text
             }
 
             override fun onTabUnselected(p0: TabLayout.Tab?) {

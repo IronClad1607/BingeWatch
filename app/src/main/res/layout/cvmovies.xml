@@ -5,7 +5,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/lightGrey"
-    android:padding="10dp"
+    android:padding="20dp"
+    android:layout_marginRight="10dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp">
 
@@ -15,6 +16,7 @@
         android:orientation="vertical">
 
         <ImageView
+            android:src="@drawable/ic_launcher_background"
             android:id="@+id/imagePoster"
             android:layout_width="134dp"
             android:layout_height="200dp" />
@@ -35,7 +37,6 @@
             android:id="@+id/tvYearMovie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:background="@color/lightGrey"
             android:textColor="@android:color/white"
             android:textSize="12sp"
