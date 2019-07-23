@@ -27,12 +27,20 @@ class MovieFragment : Fragment(), CoroutineScope {
 
     var iPopular: Int = 2
     var iCinema: Int = 2
+    var iUpcoming: Int = 2
+    var iTopRated: Int = 2
     var loadingMorePopular: Boolean = false
     var loadingMoreCinema: Boolean = false
+    var loadingMoreUpcoming: Boolean = false
+    var loadingMoreToRated: Boolean = false
     var lastVisibleItemIdPopular: Int = 0
     var lastVisibleItemIdCinema: Int = 0
+    var lastVisibleItemIdUpcoming: Int = 0
+    var lastVisibleItemIdTopRated: Int = 0
     var mMoviesPopular = ArrayList<MoviesDetails>()
     var mMoviesCinema = ArrayList<MoviesDetails>()
+    var mMoviesUpcoming = ArrayList<MoviesDetails>()
+    var mMoviesTopRated = ArrayList<MoviesDetails>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,20 +49,23 @@ class MovieFragment : Fragment(), CoroutineScope {
         launch {
             val layoutManagerPopular = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             val layoutManagerCinema = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            val layoutManagerUpcoming = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            val layoutManagerTopRated = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             rvPopularMovies.layoutManager = layoutManagerPopular
             rvCinemas.layoutManager = layoutManagerCinema
+            rvComingSoon.layoutManager = layoutManagerUpcoming
+            rvTopRated.layoutManager = layoutManagerTopRated
+
             createPopularMovies(1, 0)
             createInCinema(1, 0)
-
+            createUpcoming(1, 0)
+            createTopRated(1, 0)
 
             rvPopularMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
                     lastVisibleItemIdPopular = layoutManagerPopular.findLastVisibleItemPosition()
-                    Log.d("LastItem", "$lastVisibleItemIdPopular ${mMoviesPopular.size} $loadingMorePopular")
                     if (lastVisibleItemIdPopular == mMoviesPopular.size - 1 && !loadingMorePopular) {
-                        Log.d("LastItem", "LastitemReached!")
-                        Log.d("LastItem", "$iPopular")
                         loadMorePopular(iPopular++)
                     }
                 }
@@ -65,11 +76,31 @@ class MovieFragment : Fragment(), CoroutineScope {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
                     lastVisibleItemIdCinema = layoutManagerCinema.findLastVisibleItemPosition()
-                    Log.d("CinemaCall", "$lastVisibleItemIdCinema ${mMoviesCinema.size} $loadingMoreCinema")
-                    if (lastVisibleItemIdCinema == mMoviesCinema.size -1 && !loadingMoreCinema){
-                        Log.d("CinemaCall", "LastitemReached!")
-                        Log.d("CinemaCall", "$iCinema")
+                    if (lastVisibleItemIdCinema == mMoviesCinema.size - 1 && !loadingMoreCinema) {
                         loadMoreCinema(iCinema++)
+                    }
+                }
+            })
+
+
+            rvComingSoon.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    lastVisibleItemIdUpcoming = layoutManagerUpcoming.findLastVisibleItemPosition()
+                    if (lastVisibleItemIdUpcoming == mMoviesUpcoming.size - 1 && !loadingMoreUpcoming) {
+                        loadMoreUpcoming(iUpcoming++)
+                    }
+
+                }
+            })
+
+
+            rvTopRated.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    lastVisibleItemIdTopRated = layoutManagerTopRated.findLastVisibleItemPosition()
+                    if (lastVisibleItemIdTopRated == mMoviesTopRated.size - 1 && !loadingMoreToRated) {
+                        loadMoreTopRated(iTopRated++)
                     }
                 }
             })
@@ -78,22 +109,73 @@ class MovieFragment : Fragment(), CoroutineScope {
         return inflater.inflate(R.layout.fragment_movie, container, false)
     }
 
+    private fun loadMoreTopRated(i: Int) {
+        loadingMoreToRated = true
+        launch {
+            createTopRated(i, lastVisibleItemIdTopRated)
+        }
+    }
+
+    private suspend fun createTopRated(page: Int, last: Int) {
+        val topRatedAPI = RetroClient.movieAPI
+        val response = topRatedAPI.getTopRated(page)
+        if (response.isSuccessful) {
+            val nMovies: ArrayList<MoviesDetails>? = response.body()?.results
+            if (loadingMoreToRated) {
+                mMoviesTopRated.addAll(nMovies!!)
+                rvTopRated.scrollToPosition(last)
+            } else {
+                mMoviesTopRated = nMovies!!
+                rvTopRated.adapter = MoviesAdapter(mMoviesTopRated, requireContext()).apply {
+                    notifyDataSetChanged()
+                }
+            }
+            loadingMoreToRated = false
+        }
+    }
+
+    private fun loadMoreUpcoming(i: Int) {
+        loadingMoreUpcoming = true
+        launch {
+            createUpcoming(i, lastVisibleItemIdUpcoming)
+        }
+    }
+
+    private suspend fun createUpcoming(page: Int, last: Int) {
+        val upcomingAPI = RetroClient.movieAPI
+        val response = upcomingAPI.getUpcoming(page)
+        if (response.isSuccessful) {
+            val nMovies: ArrayList<MoviesDetails>? = response.body()?.results
+            if (loadingMoreUpcoming) {
+                mMoviesUpcoming.addAll(nMovies!!)
+                rvComingSoon.scrollToPosition(last)
+            } else {
+                mMoviesUpcoming = nMovies!!
+                rvComingSoon.adapter = MoviesAdapter(mMoviesUpcoming, requireContext()).apply {
+                    notifyDataSetChanged()
+                }
+            }
+
+            loadingMoreUpcoming = false
+        }
+    }
+
     private fun loadMoreCinema(i: Int) {
         loadingMoreCinema = true
         launch {
             Log.d("CinemaCall", "Creating Data")
-            createInCinema(i,lastVisibleItemIdCinema)
+            createInCinema(i, lastVisibleItemIdCinema)
         }
     }
 
     private suspend fun createInCinema(page: Int, last: Int) {
-        Log.d("CinemaCall","createInCinema")
+        Log.d("CinemaCall", "createInCinema")
         val cinemaAPI = RetroClient.movieAPI
         val response = cinemaAPI.getInCinema(page)
-        Log.d("CinemaCall","${response.body()}")
-        if(response.isSuccessful){
-            val nMovies : ArrayList<MoviesDetails>? = response.body()?.results
-            if(loadingMoreCinema){
+        Log.d("CinemaCall", "${response.body()}")
+        if (response.isSuccessful) {
+            val nMovies: ArrayList<MoviesDetails>? = response.body()?.results
+            if (loadingMoreCinema) {
                 Log.d(
                     "CinemaCall", """
                     $page
@@ -103,18 +185,16 @@ class MovieFragment : Fragment(), CoroutineScope {
                 )
                 mMoviesCinema.addAll(nMovies!!)
                 rvCinemas.scrollToPosition(last)
-            }
-            else{
+            } else {
                 mMoviesCinema = nMovies!!
                 Log.d("CinemaCall", "$mMoviesCinema")
-                rvCinemas.adapter = MoviesAdapter(mMoviesCinema,requireContext()).apply {
+                rvCinemas.adapter = MoviesAdapter(mMoviesCinema, requireContext()).apply {
                     notifyDataSetChanged()
                 }
             }
             loadingMoreCinema = false
-        }
-        else{
-            Log.d("CinemaCall","Call Failed!")
+        } else {
+            Log.d("CinemaCall", "Call Failed!")
         }
     }
 
