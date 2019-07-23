@@ -1,5 +1,6 @@
 package com.example.bingewatch.networks
 
+import com.example.bingewatch.model_movies.MovieAllDetails
 import com.example.bingewatch.model_movies.PopularMovies
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,4 +21,7 @@ interface MovieAPI {
 
     @GET("/3/movie/top_rated?api_key=d5b568462e39f02e011bb612583ead1e&language=en-US")
     suspend fun getTopRated(@Query("page") page: Int): Response<PopularMovies>
+
+    @GET("/3/movie/{movie_id}?api_key=d5b568462e39f02e011bb612583ead1e&language=en-US")
+    suspend fun getMoviesDetails(@Query("movie_id") movie_id:Int) : Response<MovieAllDetails>
 }

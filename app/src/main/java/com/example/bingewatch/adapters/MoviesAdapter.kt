@@ -1,11 +1,14 @@
 package com.example.bingewatch.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bingewatch.R
+import com.example.bingewatch.activities.MovieActivity
 import com.example.bingewatch.model_movies.MoviesDetails
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cvmovies.view.*
@@ -34,6 +37,11 @@ class MoviesAdapter(private val popularMovies: ArrayList<MoviesDetails>, val con
                 tvYearMovie.text = year
                 Picasso.get().load("https://image.tmdb.org/t/p/w500${popularMovies.poster_path}").fit()
                     .into(imagePoster)
+
+                setOnClickListener {
+                    val intent = Intent(context, MovieActivity::class.java)
+                    startActivity(context, intent, null)
+                }
             }
         }
     }
