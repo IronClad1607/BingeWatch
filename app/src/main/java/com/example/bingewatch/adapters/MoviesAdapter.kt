@@ -4,16 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bingewatch.R
 import com.example.bingewatch.model_movies.MoviesDetails
-import com.example.bingewatch.model_movies.PopularMovies
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cvmovies.view.*
 
-class PopularMoviesAdapter(private val popularMovies: ArrayList<MoviesDetails>, val context: Context) :
-    RecyclerView.Adapter<PopularMoviesAdapter.ViewHolder>() {
+class MoviesAdapter(private val popularMovies: ArrayList<MoviesDetails>, val context: Context) :
+    RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val li = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = li.inflate(R.layout.cvmovies, parent, false)
@@ -34,7 +32,8 @@ class PopularMoviesAdapter(private val popularMovies: ArrayList<MoviesDetails>, 
                 tvTitleMovie.text = popularMovies.title
                 val year = popularMovies.release_date.substring(0, 4)
                 tvYearMovie.text = year
-                Picasso.get().load("https://image.tmdb.org/t/p/w500${popularMovies.poster_path}").into(imagePoster)
+                Picasso.get().load("https://image.tmdb.org/t/p/w500${popularMovies.poster_path}").fit()
+                    .into(imagePoster)
             }
         }
     }

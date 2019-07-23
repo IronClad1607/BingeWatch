@@ -9,6 +9,9 @@ import retrofit2.http.Query
 
 interface MovieAPI {
 
-    @GET("/3/movie/popular?api_key=d5b568462e39f02e011bb612583ead1e")
+    @GET("/3/movie/popular?api_key=d5b568462e39f02e011bb612583ead1e&language=en-US")
     suspend fun getPopularMovies(@Query("page") page: Int): Response<PopularMovies>
+
+    @GET("/3/movie/now_playing?api_key=d5b568462e39f02e011bb612583ead1e&language=en-US")
+    suspend fun getInCinema(@Query("page") page:Int) :Response<PopularMovies>
 }
