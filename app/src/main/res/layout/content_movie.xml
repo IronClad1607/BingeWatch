@@ -84,8 +84,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Plot Summary"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvOverview"
@@ -100,8 +100,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tagline"
-                    android:textSize="15sp"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tvtagLine"
@@ -116,8 +116,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Genres"
-                    android:textSize="15sp"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvGenresInMovies"
@@ -158,18 +158,15 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Director"
+                    android:text="Crew"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp" />
+                    android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/tvDirectors"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCrew"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/textGrey"
-                    android:textSize="15sp"
-                    tools:text="Director Name" />
-
+                    android:layout_marginBottom="15dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -181,6 +178,7 @@
             android:elevation="8dp"
             android:padding="14dp"
             app:cardCornerRadius="10dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
