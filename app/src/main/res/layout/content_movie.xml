@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed-light"
             android:textColor="@android:color/white"
-            android:textSize="35sp"
+            android:textSize="40sp"
             android:textStyle="bold"
             tools:text="Title Movie" />
 
@@ -57,19 +57,20 @@
                 tools:text="Different Genres" />
         </LinearLayout>
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:background="@color/backGrey"
+            android:backgroundTint="@color/backGrey"
             android:elevation="8dp"
-            android:padding="8dp"
+            android:padding="14dp"
             app:cardCornerRadius="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="14dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -77,12 +78,13 @@
                     android:layout_marginBottom="10dp"
                     android:text="Storyline"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp" />
+                    android:textSize="25sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Plot Summary"
+                    android:textSize="20sp"
                     android:textColor="@android:color/white" />
 
                 <TextView
@@ -91,13 +93,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:textColor="@color/textGrey"
-                    android:textSize="11sp"
+                    android:textSize="15sp"
                     tools:text="Overview Here" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tagline"
+                    android:textSize="15sp"
                     android:textColor="@android:color/white" />
 
                 <TextView
@@ -106,13 +109,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:textColor="@color/textGrey"
-                    android:textSize="11sp"
+                    android:textSize="15sp"
                     tools:text="Overview Here" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Genres"
+                    android:textSize="15sp"
                     android:textColor="@android:color/white" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -121,28 +125,29 @@
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:background="@color/backGrey"
+            android:backgroundTint="@color/backGrey"
             android:elevation="8dp"
-            android:padding="8dp"
+            android:padding="14dp"
             app:cardCornerRadius="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="14dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Top-Billed Cast"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp" />
+                    android:textSize="25sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCast"
@@ -155,32 +160,32 @@
                     android:layout_height="wrap_content"
                     android:text="Director"
                     android:textColor="@android:color/white"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvDirectors"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/textGrey"
-                    android:textSize="11sp"
+                    android:textSize="15sp"
                     tools:text="Director Name" />
 
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:background="@color/backGrey"
+            android:backgroundTint="@color/backGrey"
             android:elevation="8dp"
-            android:padding="8dp"
+            android:padding="14dp"
             app:cardCornerRadius="10dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="14dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -188,14 +193,14 @@
                     android:layout_marginBottom="10dp"
                     android:text="Details"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp" />
+                    android:textSize="25sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Release Date"
                     android:textColor="@android:color/white"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvRelease"
@@ -203,7 +208,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:textColor="@color/textGrey"
-                    android:textSize="11sp"
+                    android:textSize="15sp"
                     tools:text="release date" />
 
                 <TextView
@@ -211,7 +216,7 @@
                     android:layout_height="wrap_content"
                     android:text="Budget"
                     android:textColor="@android:color/white"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvBudget"
@@ -219,7 +224,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:textColor="@color/textGrey"
-                    android:textSize="11sp"
+                    android:textSize="15sp"
                     tools:text="budget" />
 
                 <TextView
@@ -227,7 +232,7 @@
                     android:layout_height="wrap_content"
                     android:text="Runtime"
                     android:textColor="@android:color/white"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvRuntimeDetails"
@@ -235,7 +240,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:textColor="@color/textGrey"
-                    android:textSize="11sp"
+                    android:textSize="15sp"
                     tools:text="budget" />
 
                 <TextView
@@ -243,7 +248,7 @@
                     android:layout_height="wrap_content"
                     android:text="Production Companies"
                     android:textColor="@android:color/white"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvPC"
@@ -252,29 +257,30 @@
 
 
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:background="@color/backGrey"
+            android:backgroundTint="@color/backGrey"
             android:elevation="8dp"
-            android:padding="8dp"
+            android:padding="14dp"
             app:cardCornerRadius="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="14dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="User Review"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp" />
+                    android:textSize="25sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvReviews"
@@ -282,28 +288,29 @@
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:background="@color/backGrey"
+            android:backgroundTint="@color/backGrey"
             android:elevation="8dp"
-            android:padding="8dp"
+            android:padding="14dp"
             app:cardCornerRadius="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="14dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="More Like This"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp" />
+                    android:textSize="25sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvSimilar"
@@ -311,7 +318,7 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
 
     </LinearLayout>

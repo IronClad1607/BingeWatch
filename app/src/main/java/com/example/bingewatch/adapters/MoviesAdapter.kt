@@ -40,6 +40,7 @@ class MoviesAdapter(private val popularMovies: ArrayList<MoviesDetails>, val con
 
                 setOnClickListener {
                     val intent = Intent(context, MovieActivity::class.java)
+                    intent.putExtra("movieId",popularMovies.id)
                     startActivity(context, intent, null)
                 }
             }
