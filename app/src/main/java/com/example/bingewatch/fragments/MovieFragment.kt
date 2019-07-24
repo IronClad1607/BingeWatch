@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bingewatch.R
-import com.example.bingewatch.adapters.MoviesAdapter
+import com.example.bingewatch.adapters.movies.MoviesAdapter
 import com.example.bingewatch.model_movies.MoviesDetails
 import com.example.bingewatch.networks.RetroClient
 import kotlinx.android.synthetic.main.fragment_movie.*
@@ -126,7 +126,10 @@ class MovieFragment : Fragment(), CoroutineScope {
                 rvTopRated.scrollToPosition(last)
             } else {
                 mMoviesTopRated = nMovies!!
-                rvTopRated.adapter = MoviesAdapter(mMoviesTopRated, requireContext()).apply {
+                rvTopRated.adapter = MoviesAdapter(
+                    mMoviesTopRated,
+                    requireContext()
+                ).apply {
                     notifyDataSetChanged()
                 }
             }
@@ -151,7 +154,10 @@ class MovieFragment : Fragment(), CoroutineScope {
                 rvComingSoon.scrollToPosition(last)
             } else {
                 mMoviesUpcoming = nMovies!!
-                rvComingSoon.adapter = MoviesAdapter(mMoviesUpcoming, requireContext()).apply {
+                rvComingSoon.adapter = MoviesAdapter(
+                    mMoviesUpcoming,
+                    requireContext()
+                ).apply {
                     notifyDataSetChanged()
                 }
             }
@@ -188,7 +194,10 @@ class MovieFragment : Fragment(), CoroutineScope {
             } else {
                 mMoviesCinema = nMovies!!
                 Log.d("CinemaCall", "$mMoviesCinema")
-                rvCinemas.adapter = MoviesAdapter(mMoviesCinema, requireContext()).apply {
+                rvCinemas.adapter = MoviesAdapter(
+                    mMoviesCinema,
+                    requireContext()
+                ).apply {
                     notifyDataSetChanged()
                 }
             }
@@ -225,7 +234,10 @@ class MovieFragment : Fragment(), CoroutineScope {
             } else {
                 mMoviesPopular = nMovies!!
                 Log.d("PTAG", "$mMoviesPopular")
-                rvPopularMovies.adapter = MoviesAdapter(mMoviesPopular, requireContext()).apply {
+                rvPopularMovies.adapter = MoviesAdapter(
+                    mMoviesPopular,
+                    requireContext()
+                ).apply {
                     notifyDataSetChanged()
                 }
             }

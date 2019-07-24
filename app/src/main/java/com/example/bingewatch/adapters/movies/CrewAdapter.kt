@@ -1,6 +1,5 @@
-package com.example.bingewatch.adapters
+package com.example.bingewatch.adapters.movies
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View

@@ -3,6 +3,7 @@ package com.example.bingewatch.networks
 import com.example.bingewatch.model_movies.CreditsResponse
 import com.example.bingewatch.model_movies.MovieAllDetails
 import com.example.bingewatch.model_movies.PopularMovies
+import com.example.bingewatch.model_movies.Review
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,5 +29,8 @@ interface MovieAPI {
     suspend fun getMoviesDetails(@Path("movie_id") movie_id: Int): Response<MovieAllDetails>
 
     @GET("/3/movie/{movie_id}/credits?api_key=d5b568462e39f02e011bb612583ead1e")
-    suspend fun getCreditsDetails(@Path("movie_id") movie_id: Int):Response<CreditsResponse>
+    suspend fun getCreditsDetails(@Path("movie_id") movie_id: Int): Response<CreditsResponse>
+
+    @GET("/3/movie/{movie_id}/reviews?api_key=d5b568462e39f02e011bb612583ead1e&language=en-US")
+    suspend fun getReviews(@Path("movie_id") movie_id: Int, @Query("page") page: Int): Response<Review>
 }

@@ -1,4 +1,4 @@
-package com.example.bingewatch.adapters
+package com.example.bingewatch.adapters.movies
 
 import android.content.Context
 import android.view.LayoutInflater
