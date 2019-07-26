@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="false"
     android:background="@android:color/black"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activities.MovieActivity"
@@ -273,12 +274,24 @@
                 android:orientation="vertical"
                 android:padding="14dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="User Review"
-                    android:textColor="@android:color/white"
-                    android:textSize="25sp" />
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="User Review"
+                        android:textColor="@android:color/white"
+                        android:textSize="25sp" />
+
+                    <Button
+                        android:id="@+id/btnSeeAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:background="@android:color/black"
+                        android:text="See All" />
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvReviews"

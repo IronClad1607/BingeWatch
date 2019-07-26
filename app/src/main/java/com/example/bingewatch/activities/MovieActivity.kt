@@ -7,12 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bingewatch.R
-import com.example.bingewatch.adapters.movies.CastAdapter
-import com.example.bingewatch.adapters.movies.CompanyAdapter
-import com.example.bingewatch.adapters.movies.CrewAdapter
-import com.example.bingewatch.adapters.movies.GenresAdapter
+import com.example.bingewatch.adapters.movies.*
 import com.example.bingewatch.model_movies.CreditsResponse
 import com.example.bingewatch.model_movies.MovieAllDetails
+import com.example.bingewatch.model_movies.Review
 import com.example.bingewatch.networks.RetroClient
 import kotlinx.android.synthetic.main.content_movie.*
 import kotlinx.coroutines.CoroutineScope
@@ -25,6 +23,11 @@ class MovieActivity : AppCompatActivity(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
+
+    var iReview: Int = 2
+    var loadingMoreReview: Boolean = false
+    var lastVisibleItemIdReview: Int = 0
+    var mReview = ArrayList<Review>()
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,15 +58,58 @@ class MovieActivity : AppCompatActivity(), CoroutineScope {
             rvCrew.layoutManager = LinearLayoutManager(this@MovieActivity, RecyclerView.HORIZONTAL, false)
             rvGenresInMovies.layoutManager = LinearLayoutManager(this@MovieActivity, RecyclerView.HORIZONTAL, false)
             rvPC.layoutManager = LinearLayoutManager(this@MovieActivity, RecyclerView.HORIZONTAL, false)
-            val layoutManagerReview = LinearLayoutManager(this@MovieActivity,RecyclerView.HORIZONTAL,false)
+            val layoutManagerReview = LinearLayoutManager(this@MovieActivity, RecyclerView.HORIZONTAL, false)
             rvReviews.layoutManager = layoutManagerReview
             rvCast.adapter = CastAdapter(creditBody?.cast, this@MovieActivity)
             rvCrew.adapter = CrewAdapter(creditBody?.crew, this@MovieActivity)
             rvGenresInMovies.adapter =
                 GenresAdapter(movieBody.genres, this@MovieActivity)
             rvPC.adapter = CompanyAdapter(movieBody.production_companies, this@MovieActivity)
+
+
+            createReviews(1, movieID, 0)
+
+            rvReviews.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    lastVisibleItemIdReview = layoutManagerReview.findLastVisibleItemPosition()
+                    if (lastVisibleItemIdReview == mReview.size - 1 && !loadingMoreReview) {
+                        loadMoreReview(iReview++, movieID)
+                    }
+
+                }
+            })
         }
 
+
+    }
+
+    private fun loadMoreReview(i: Int, movieID: Int) {
+        loadingMoreReview = true
+        launch {
+            createReviews(i, movieID, lastVisibleItemIdReview)
+        }
+    }
+
+    private suspend fun createReviews(page: Int, movieID: Int, last: Int) {
+        val reviewAPI = RetroClient.movieAPI
+        val response = reviewAPI.getReviews(movieID, page)
+        Log.d("TAG","$response")
+        if (response.isSuccessful) {
+            val nReview: ArrayList<Review>? = response.body()?.results
+            Log.d("TAG","$nReview")
+            if (loadingMoreReview) {
+                mReview.addAll(nReview!!)
+                rvReviews.scrollToPosition(last)
+            } else {
+                mReview = nReview!!
+                rvReviews.adapter = ReviewAdapter(mReview, this).apply {
+                    notifyDataSetChanged()
+                }
+            }
+            loadingMoreReview = false
+
+        }
 
     }
 

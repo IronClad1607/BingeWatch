@@ -182,13 +182,6 @@ class MovieFragment : Fragment(), CoroutineScope {
         if (response.isSuccessful) {
             val nMovies: ArrayList<MoviesDetails>? = response.body()?.results
             if (loadingMoreCinema) {
-                Log.d(
-                    "CinemaCall", """
-                    $page
-                    $last
-                    LoadingMore
-                """.trimIndent()
-                )
                 mMoviesCinema.addAll(nMovies!!)
                 rvCinemas.scrollToPosition(last)
             } else {

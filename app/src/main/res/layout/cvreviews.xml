@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="10dp"
     android:layout_marginBottom="15dp"
     android:backgroundTint="@color/lightGrey"
     android:elevation="8dp"
@@ -30,9 +31,10 @@
         <TextView
             android:id="@+id/tvContent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:text="content"
-            android:textColor="@android:color/white"/>
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="true"
+            android:textColor="@android:color/white"
+            tools:text="content" />
 
     </LinearLayout>
 
