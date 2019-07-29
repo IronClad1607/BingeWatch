@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -25,8 +26,6 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class LoginActivity : AppCompatActivity(), CoroutineScope {
-
-
     var sessionResponse: SessionResponse? = null
     private val supervisor = SupervisorJob()
     override val coroutineContext: CoroutineContext
@@ -36,8 +35,8 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val pref = getPreferences(Context.MODE_PRIVATE)
 
+        val pref = getPreferences(Context.MODE_PRIVATE)
 
         val retainLoginInIntent = Intent(this, MajorActivity::class.java)
         if (pref.contains("username") && pref.contains("password")) {
