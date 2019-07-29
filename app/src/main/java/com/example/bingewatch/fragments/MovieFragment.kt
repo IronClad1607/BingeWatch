@@ -65,6 +65,7 @@ class MovieFragment : Fragment(), CoroutineScope {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
                     lastVisibleItemIdPopular = layoutManagerPopular.findLastVisibleItemPosition()
+
                     if (lastVisibleItemIdPopular == mMoviesPopular.size - 1 && !loadingMorePopular) {
                         loadMorePopular(iPopular++)
                     }

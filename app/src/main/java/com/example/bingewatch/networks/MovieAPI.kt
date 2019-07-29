@@ -31,4 +31,7 @@ interface MovieAPI {
 
     @GET("/3/movie/{movie_id}/reviews?api_key=d5b568462e39f02e011bb612583ead1e&language=en-US")
     suspend fun getReviews(@Path("movie_id") movie_id: Int, @Query("page") page: Int): Response<Reviews>
+
+    @GET("/3/movie/{movie_id}/similar?api_key=d5b568462e39f02e011bb612583ead1e&language=en-US")
+    suspend fun getSimilar(@Path("movie_id") movie_id: Int, @Query("page") page: Int): Response<PopularMovies>
 }

@@ -10,8 +10,11 @@ import com.example.bingewatch.R
 import com.example.bingewatch.adapters.movies.*
 import com.example.bingewatch.model_movies.CreditsResponse
 import com.example.bingewatch.model_movies.MovieAllDetails
+import com.example.bingewatch.model_movies.MoviesDetails
 import com.example.bingewatch.model_movies.Review
 import com.example.bingewatch.networks.RetroClient
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_movie.*
 import kotlinx.android.synthetic.main.content_movie.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,9 +28,13 @@ class MovieActivity : AppCompatActivity(), CoroutineScope {
 
 
     var iReview: Int = 2
+    var iSimilar: Int = 2
     var loadingMoreReview: Boolean = false
+    var loadingMoreSimilar: Boolean = false
     var lastVisibleItemIdReview: Int = 0
+    var lastVisibleItemIdSimilar: Int = 0
     var mReview = ArrayList<Review>()
+    var mSimilar = ArrayList<MoviesDetails>()
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +44,7 @@ class MovieActivity : AppCompatActivity(), CoroutineScope {
         launch {
             val movieBody = createDetails(movieID)
             val creditBody = createCredits(movieID)
-
+            Log.d("Cast","${creditBody?.cast}")
             tvTitle.text = movieBody?.title
             val year = movieBody?.release_date?.substring(0, 4)
             val genres = if (movieBody?.genres?.size!! >= 2) {
@@ -46,6 +53,7 @@ class MovieActivity : AppCompatActivity(), CoroutineScope {
                 movieBody.genres[0].name
             }
             tvYear.text = year
+            Picasso.get().load("https://image.tmdb.org/t/p/w500${movieBody.backdrop_path}").fit().into(backdropImage)
             tvGenres.text = genres
             tvBudget.text = convertBudget(movieBody.budget)
             tvRuntime.text = convertRuntime(movieBody.runtime)
@@ -59,7 +67,9 @@ class MovieActivity : AppCompatActivity(), CoroutineScope {
             rvGenresInMovies.layoutManager = LinearLayoutManager(this@MovieActivity, RecyclerView.HORIZONTAL, false)
             rvPC.layoutManager = LinearLayoutManager(this@MovieActivity, RecyclerView.HORIZONTAL, false)
             val layoutManagerReview = LinearLayoutManager(this@MovieActivity, RecyclerView.HORIZONTAL, false)
+            val layoutManagerSimilar = LinearLayoutManager(this@MovieActivity, RecyclerView.HORIZONTAL, false)
             rvReviews.layoutManager = layoutManagerReview
+            rvSimilar.layoutManager = layoutManagerSimilar
             rvCast.adapter = CastAdapter(creditBody?.cast, this@MovieActivity)
             rvCrew.adapter = CrewAdapter(creditBody?.crew, this@MovieActivity)
             rvGenresInMovies.adapter =
@@ -68,6 +78,7 @@ class MovieActivity : AppCompatActivity(), CoroutineScope {
 
 
             createReviews(1, movieID, 0)
+            createSimilar(1, movieID, 0)
 
             rvReviews.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -79,9 +90,57 @@ class MovieActivity : AppCompatActivity(), CoroutineScope {
 
                 }
             })
+
+            rvSimilar.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    lastVisibleItemIdSimilar = layoutManagerSimilar.findLastVisibleItemPosition()
+                    Log.d(
+                        "Similar", """
+                        $lastVisibleItemIdSimilar
+                        ${mSimilar.size}
+                    """.trimIndent()
+                    )
+                    if (lastVisibleItemIdSimilar == mSimilar.size - 1 && !loadingMoreSimilar) {
+                        loadMoreSimilar(iSimilar++, movieID)
+                    }
+                }
+            })
         }
 
 
+    }
+
+    private fun loadMoreSimilar(i: Int, movieID: Int) {
+        loadingMoreSimilar = true
+        launch {
+            Log.d(
+                "Similar", """
+                $loadingMoreSimilar
+                Creating Similar
+            """.trimIndent()
+            )
+            createSimilar(i, movieID, lastVisibleItemIdSimilar)
+        }
+    }
+
+    private suspend fun createSimilar(page: Int, movieID: Int, last: Int) {
+        val similarAPI = RetroClient.movieAPI
+        val response = similarAPI.getSimilar(movieID, page)
+        Log.d("Similar", "$response")
+        if (response.isSuccessful) {
+            val nSimilar: ArrayList<MoviesDetails>? = response.body()?.results
+            if (loadingMoreSimilar) {
+                mSimilar.addAll(nSimilar!!)
+                rvSimilar.scrollToPosition(last)
+            } else {
+                mSimilar = nSimilar!!
+                rvSimilar.adapter = MoviesAdapter(mSimilar, this).apply {
+                    notifyDataSetChanged()
+                }
+            }
+            loadingMoreSimilar = false
+        }
     }
 
     private fun loadMoreReview(i: Int, movieID: Int) {
@@ -94,10 +153,10 @@ class MovieActivity : AppCompatActivity(), CoroutineScope {
     private suspend fun createReviews(page: Int, movieID: Int, last: Int) {
         val reviewAPI = RetroClient.movieAPI
         val response = reviewAPI.getReviews(movieID, page)
-        Log.d("TAG","$response")
+
         if (response.isSuccessful) {
             val nReview: ArrayList<Review>? = response.body()?.results
-            Log.d("TAG","$nReview")
+            Log.d("TAG", "$nReview")
             if (loadingMoreReview) {
                 mReview.addAll(nReview!!)
                 rvReviews.scrollToPosition(last)

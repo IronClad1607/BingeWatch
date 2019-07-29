@@ -49,8 +49,12 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-alpha08'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    implementation 'com.google.android.material:material:1.0.0-beta01'
+
     implementation "androidx.room:room-runtime:2.1.0"
     kapt "androidx.room:room-compiler:2.1.0"
 
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.unstoppable:submitbutton:1.1.3'
 }

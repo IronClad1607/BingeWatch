@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="20dp"
@@ -12,9 +14,9 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center"
-        android:layout_marginBottom="250dp">
+        app:hintEnabled="true"
+        app:passwordToggleEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
@@ -23,54 +25,53 @@
             android:fontFamily="sans-serif-condensed-light"
             android:hint="Username"
             android:inputType="textEmailAddress"
+            android:textColor="@android:color/white"
             android:textSize="20sp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-light"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:textSize="20sp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:gravity="center"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-light"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.unstoppable.submitbuttonview.SubmitButton
         android:id="@+id/btnGuest"
-        android:text="Create Guest Session"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:fontFamily="sans-serif-condensed-light"
-        android:textColor="@android:color/black"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:buttonColor="@android:color/white"
+        app:buttonText="Create Guest Session"
+        app:buttonTextSize="15sp" />
 
-    <Button
-        android:id="@+id/btnLogIn"
-        android:text="Log In"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:fontFamily="sans-serif-condensed-light"
-        android:textColor="@android:color/black"
+    <com.unstoppable.submitbuttonview.SubmitButton
+        android:id="@+id/btnLogin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:buttonColor="@android:color/white"
+        app:buttonText="Log In"
+        app:buttonTextSize="15sp"
+        app:progressStyle="loading" />
 
-    <Button
+    <com.unstoppable.submitbuttonview.SubmitButton
         android:id="@+id/btnSignUp"
-        android:text="Sign Up"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:fontFamily="sans-serif-condensed-light"
-        android:textColor="@android:color/black"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:buttonColor="@android:color/white"
+        app:buttonText="Sign Up"
+        app:buttonTextSize="15sp" />
 
 </LinearLayout>

@@ -11,6 +11,7 @@ import com.example.bingewatch.R
 import com.example.bingewatch.activities.MovieActivity
 import com.example.bingewatch.model_movies.MoviesDetails
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_movie.view.*
 import kotlinx.android.synthetic.main.cvmovies.view.*
 
 class MoviesAdapter(private val popularMovies: ArrayList<MoviesDetails>, val context: Context) :
