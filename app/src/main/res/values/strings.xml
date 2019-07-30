@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BingeWatch</string>
+    <string name="app_name">Binge Watch</string>
     <string name="apiKey">d5b568462e39f02e011bb612583ead1e</string>
 
     <string name="movies">Movies</string>
@@ -7,5 +7,4 @@
     <string name="celebs">Celebrities</string>
     <string name="title_activity_movie">MovieActivity</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_splash_screen">SplashScreen</string>
 </resources>

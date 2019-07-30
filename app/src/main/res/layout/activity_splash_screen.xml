@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradientsplash"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".activities.SplashScreen">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="285dp"
+        android:layout_marginBottom="100dp"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[3]" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello World"
-        android:textSize="50sp" />
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="50sp"
+        android:textColor="@android:color/holo_red_dark"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:text="Binge Watch" />
+
+</LinearLayout>
